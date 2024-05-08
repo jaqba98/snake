@@ -3,6 +3,8 @@ import keyboard
 import time
 import threading
 
+import system
+
 map_width = 50
 map_height = 20
 
@@ -12,9 +14,9 @@ player_y = 5
 direction = "d"
 
 def clean_console():
-	if os.name == "nt":
+	if system.get_system_name()  == "windows":
 		os.system("cls")
-	else:
+	elif system.get_system_name() == "unix":
 		os.system("clear")
 
 def display_map():
