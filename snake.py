@@ -9,7 +9,7 @@ map_height = 20
 player_x = 5
 player_y = 5
 
-direction = "w"
+direction = "d"
 
 def clean_console():
 	if os.name == "nt":
