@@ -4,7 +4,7 @@ import time
 import threading
 
 map_width = 50
-map_height = 50
+map_height = 20
 
 player_x = 5
 player_y = 5
@@ -18,14 +18,26 @@ def clean_console():
 		os.system("clear")
 
 def display_map():
-	for y in range(map_width):
+	map = ""
+	topLine = ""
+	for x in range(map_width):
+		topLine += "#"
+
+	map += topLine + "\n"
+	for y in range(map_height):
 		line = ""
-		for x in range(map_height):
+		for x in range(map_width):
+			if x == 0:
+				line += "#"
 			if x == player_x and y == player_y:
 				line += "P"
+			elif x == map_width - 2:
+				line += "#"
 			else:
 				line += " "
-		print(line)
+		map += line + "\n"
+	map += topLine + "\n"
+	print(map)
 
 def monitor_keyboard_events():
 	global direction
@@ -55,4 +67,4 @@ while True:
 	
 	clean_console()
 	display_map()
-	time.sleep(0.025)
+	time.sleep(0.1)
