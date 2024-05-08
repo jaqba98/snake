@@ -1,4 +1,5 @@
 import os
+import keyboard
 
 def clean_console():
 	if os.name == "nt":
@@ -7,6 +8,9 @@ def clean_console():
 		os.system("clear")
 
 while True:
-	print("Map")
+	event = keyboard.read_event()
+	if event.event_type == keyboard.KEY_DOWN and event.name == "q":
+		break;
+	print(event.name)
 	clean_console()
 	
