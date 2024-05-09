@@ -9,7 +9,7 @@ import player
 map_width = 50
 map_height = 20
 
-direction = "d"
+direction = "up"
 
 player2 = player.Player(5, 5)
 
@@ -48,13 +48,13 @@ def monitor_keyboard_events():
 	global direction
 	while True:
 		if keyboard.is_pressed("w"):
-			direction = "w"
+			direction = "up"
 		if keyboard.is_pressed("s"):
-			direction = "s"
+			direction = "down"
 		if keyboard.is_pressed("a"):
-			direction = "a"
+			direction = "left"
 		if keyboard.is_pressed("d"):
-			direction = "d"
+			direction = "right"
 
 keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True
@@ -63,14 +63,7 @@ keyboard_thread.start()
 while True:
 	oldX = player2.x
 	oldY = player2.y
-	if direction == "w":
-		player2.y -= 1
-	elif direction == "s":
-		player2.y += 1
-	elif direction == "a":
-		player2.x -= 1
-	elif direction == "d":
-		player2.x += 1
+	player2.move_player(direction)
 
 	if len(player2.tails) < 15:	
 		player2.add_tail(oldX, oldY)
