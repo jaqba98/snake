@@ -47,7 +47,7 @@ g_map = game_map.GameMap(map_width, map_height)
 
 while True:
 	clean_console()
-	g_player.move_player(direction)
+	g_player.move_player(direction, g_map)
 	g_map.draw_game_map(g_player)
 	time.sleep(0.1)
 

@@ -15,15 +15,27 @@ class GamePlayer:
 		newTail = Tail(x, y)
 		self.tails.append(newTail)
 
-	def move_player(self, key):
+	def move_player(self, key, g_map):
 		if key == "w":
-			self.y -= 1
+			if self.y == 1:
+				self.y = g_map.height - 2
+			else:
+				self.y -= 1
 		elif key == "s":
-			self.y += 1
+			if self.y == g_map.height - 2:
+				self.y = 1
+			else:
+				self.y += 1
 		elif key == "a":
-			self.x -= 1
+			if self.x == 1:
+				self.x = g_map.width - 2
+			else:
+				self.x -= 1
 		elif key == "d":
-			self.x += 1
+			if self.x == g_map.width - 2:
+				self.x = 1
+			else:
+				self.x += 1
 		else:
 			raise Exception("Not supported key for move the player: " + key)
 
