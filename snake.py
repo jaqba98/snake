@@ -20,31 +20,6 @@ def clean_console():
 	elif system.get_system_name() == "unix":
 		os.system("clear")
 
-def display_map():
-	map = []
-	for y in range(map_height):
-		currMap = []
-		for x in range(map_width):
-			if x == 0 or x == map_width - 1 or y == 0 or y == map_height - 1:
-				currMap.append("#")
-			else:
-				currMap.append(" ")
-		map.append(currMap)
-
-	map[player2.y][player2.x] = "P";
-
-	for tail in player2.tails:
-		map[tail.y][tail.x] = "O"
-	
-	mapStr = ""
-	for y in range(map_height):
-		mapLine = ""
-		for x in range(map_width):
-			mapLine = mapLine + map[y][x]
-		mapStr = mapStr + "\n" + mapLine
-
-	print(mapStr)
-
 def monitor_keyboard_events():
 	global direction
 	while True:
@@ -61,8 +36,14 @@ keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True
 keyboard_thread.start()
 
+print("Snake in Python v0.1")
+print("Author: Jakub Olejarczyk")
+print("----------------------------")
+map_width = int(input("Enter the map width: "))
+map_height = int(input("Enter the map height: "))
+
 g_player  = game_player.GamePlayer(10, 10, "$")
-g_map = game_map.GameMap(80, 20)
+g_map = game_map.GameMap(map_width, map_height)
 
 while True:
 	clean_console()
