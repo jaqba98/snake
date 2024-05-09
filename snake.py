@@ -4,19 +4,14 @@ import time
 import threading
 
 import system
+import player
 
 map_width = 50
 map_height = 20
 
 direction = "d"
 
-class Tail:
-	tails = []
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
-
-player = Tail(5, 5)
+player2 = player.Player(5, 5)
 
 def clean_console():
 	if system.get_system_name()  == "windows":
@@ -35,9 +30,9 @@ def display_map():
 				currMap.append(" ")
 		map.append(currMap)
 
-	map[player.y][player.x] = "P";
+	map[player2.y][player2.x] = "P";
 
-	for tail in player.tails:
+	for tail in player2.tails:
 		map[tail.y][tail.x] = "O"
 	
 	mapStr = ""
@@ -66,25 +61,25 @@ keyboard_thread.daemon = True
 keyboard_thread.start()
 
 while True:
-	oldX = player.x
-	oldY = player.y
+	oldX = player2.x
+	oldY = player2.y
 	if direction == "w":
-		player.y -= 1
+		player2.y -= 1
 	elif direction == "s":
-		player.y += 1
+		player2.y += 1
 	elif direction == "a":
-		player.x -= 1
+		player2.x -= 1
 	elif direction == "d":
-		player.x += 1
+		player2.x += 1
 
-	if len(player.tails) < 15:	
-		player.tails.append(Tail(oldX, oldY));
+	if len(player2.tails) < 15:	
+		player2.add_tail(oldX, oldY)
 	
-	oldTile = Tail(oldX, oldY)
-	for tile in player.tails:
+	oldTile = player.Tail(oldX, oldY)
+	for tile in player2.tails:
 		x = oldTile.x
 		y = oldTile.y
-		oldTile = Tail(tile.x, tile.y)
+		oldTile = player.Tail(tile.x, tile.y)
 		tile.x = x
 		tile.y = y
 
