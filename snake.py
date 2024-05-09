@@ -8,10 +8,15 @@ import system
 map_width = 50
 map_height = 20
 
-player_x = 5
-player_y = 5
-
 direction = "d"
+
+class Tail:
+	tails = []
+	def __init__(self, x, y):
+		self.x = x
+		self.y = y
+
+player = Tail(5, 5)
 
 def clean_console():
 	if system.get_system_name()  == "windows":
@@ -20,26 +25,29 @@ def clean_console():
 		os.system("clear")
 
 def display_map():
-	map = ""
-	topLine = ""
-	for x in range(map_width):
-		topLine += "#"
-
-	map += topLine + "\n"
+	map = []
 	for y in range(map_height):
-		line = ""
+		currMap = []
 		for x in range(map_width):
-			if x == 0:
-				line += "#"
-			if x == player_x and y == player_y:
-				line += "P"
-			elif x == map_width - 2:
-				line += "#"
+			if x == 0 or x == map_width - 1 or y == 0 or y == map_height - 1:
+				currMap.append("#")
 			else:
-				line += " "
-		map += line + "\n"
-	map += topLine + "\n"
-	print(map)
+				currMap.append(" ")
+		map.append(currMap)
+
+	map[player.y][player.x] = "P";
+
+	for tail in player.tails:
+		map[tail.y][tail.x] = "O"
+	
+	mapStr = ""
+	for y in range(map_height):
+		mapLine = ""
+		for x in range(map_width):
+			mapLine = mapLine + map[y][x]
+		mapStr = mapStr + "\n" + mapLine
+
+	print(mapStr)
 
 def monitor_keyboard_events():
 	global direction
@@ -58,15 +66,20 @@ keyboard_thread.daemon = True
 keyboard_thread.start()
 
 while True:
+	oldX = player.x
+	oldY = player.y
 	if direction == "w":
-		player_y -= 1
+		player.y -= 1
 	elif direction == "s":
-		player_y += 1
+		player.y += 1
 	elif direction == "a":
-		player_x -= 1
+		player.x -= 1
 	elif direction == "d":
-		player_x += 1
+		player.x += 1
 	
+	player.tails.append(Tail(oldX, oldY));
+	print(direction)
+
 	clean_console()
 	display_map()
 	time.sleep(0.1)
