@@ -4,14 +4,15 @@ import time
 import threading
 
 import system
-import player
+import game_player
+import game_map
 
 map_width = 50
 map_height = 20
 
 direction = "w"
 
-player2 = player.Player(5, 5)
+player2 = game_player.GamePlayer(5, 5, "d")
 
 def clean_console():
 	if system.get_system_name()  == "windows":
@@ -60,22 +61,27 @@ keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True
 keyboard_thread.start()
 
+g_player  = game_player.GamePlayer(10, 10, "$")
+g_map = game_map.GameMap(80, 20)
+
 while True:
-	oldX = player2.x
-	oldY = player2.y
-	player2.move_player(direction)
-
-	if len(player2.tails) < 15:	
-		player2.add_tail(oldX, oldY)
-	
-	oldTile = player.Tail(oldX, oldY)
-	for tile in player2.tails:
-		x = oldTile.x
-		y = oldTile.y
-		oldTile = player.Tail(tile.x, tile.y)
-		tile.x = x
-		tile.y = y
-
 	clean_console()
-	display_map()
+	g_player.move_player(direction)
+	g_map.draw_game_map(g_player)
 	time.sleep(0.1)
+
+#while True:
+	#oldX = player2.x
+	#oldY = player2.y
+	#player2.move_player(direction)
+
+	#if len(player2.tails) < 15:	
+#		player2.add_tail(oldX, oldY)
+	
+	#oldTile = player.Tail(oldX, oldY)
+	#for tile in player2.tails:
+	#	x = oldTile.x
+	#	y = oldTile.y
+	#	oldTile = player.Tail(tile.x, tile.y)
+	#	tile.x = x
+	#	tile.y = y

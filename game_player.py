@@ -3,12 +3,13 @@ class Tail:
 		self.x = x
 		self.y = y
 
-class Player:
+class GamePlayer:
 	tails = []
 
-	def __init__(self, x, y):
+	def __init__(self, x, y, model):
 		self.x = x
 		self.y = y
+		self.model = model
 	
 	def add_tail(self, x, y):
 		newTail = Tail(x, y)
