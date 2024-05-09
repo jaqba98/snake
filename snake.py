@@ -76,9 +76,17 @@ while True:
 		player.x -= 1
 	elif direction == "d":
 		player.x += 1
+
+	if len(player.tails) < 15:	
+		player.tails.append(Tail(oldX, oldY));
 	
-	player.tails.append(Tail(oldX, oldY));
-	print(direction)
+	oldTile = Tail(oldX, oldY)
+	for tile in player.tails:
+		x = oldTile.x
+		y = oldTile.y
+		oldTile = Tail(tile.x, tile.y)
+		tile.x = x
+		tile.y = y
 
 	clean_console()
 	display_map()
