@@ -9,7 +9,7 @@ import player
 map_width = 50
 map_height = 20
 
-direction = "up"
+direction = "w"
 
 player2 = player.Player(5, 5)
 
@@ -48,13 +48,13 @@ def monitor_keyboard_events():
 	global direction
 	while True:
 		if keyboard.is_pressed("w"):
-			direction = "up"
+			direction = "w"
 		if keyboard.is_pressed("s"):
-			direction = "down"
+			direction = "s"
 		if keyboard.is_pressed("a"):
-			direction = "left"
+			direction = "a"
 		if keyboard.is_pressed("d"):
-			direction = "right"
+			direction = "d"
 
 keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True

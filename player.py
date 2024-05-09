@@ -14,15 +14,15 @@ class Player:
 		newTail = Tail(x, y)
 		self.tails.append(newTail)
 
-	def move_player(self, direction):
-		if direction == "up":
+	def move_player(self, key):
+		if key == "w":
 			self.y -= 1
-		elif direction == "down":
+		elif key == "s":
 			self.y += 1
-		elif direction == "left":
+		elif key == "a":
 			self.x -= 1
-		elif direction == "right":
+		elif key == "d":
 			self.x += 1
 		else:
-			raise Exception("Not supported direction: " + direction)
+			raise Exception("Not supported key for move the player: " + key)
 
