@@ -11,7 +11,7 @@ map_width = 50
 map_height = 20
 
 direction = "w"
-
+run = True
 player2 = game_player.GamePlayer(5, 5, "d")
 
 def clean_console():
@@ -22,6 +22,7 @@ def clean_console():
 
 def monitor_keyboard_events():
 	global direction
+	global run
 	while True:
 		if keyboard.is_pressed("w"):
 			direction = "w"
@@ -31,6 +32,8 @@ def monitor_keyboard_events():
 			direction = "a"
 		if keyboard.is_pressed("d"):
 			direction = "d"
+		if keyboard.is_pressed("e"):
+			run = False
 
 keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True
@@ -45,7 +48,7 @@ map_height = int(input("Enter the map height: "))
 g_player  = game_player.GamePlayer(10, 10, "$")
 g_map = game_map.GameMap(map_width, map_height)
 
-while True:
+while run == True:
 	clean_console()
 	g_player.move_player(direction, g_map)
 	g_map.draw_game_map(g_player)
