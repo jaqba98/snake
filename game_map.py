@@ -3,7 +3,7 @@ class GameMap:
 		self.width = width
 		self.height = height
 
-	def draw_game_map(self, g_player):
+	def draw_game_map(self, g_player, appleX, appleY):
 		game_map = []
 		# Prepare the map area
 		for y in range(self.height):
@@ -11,6 +11,8 @@ class GameMap:
 			for x in range(self.width):
 				if y == 0 or y == self.height - 1 or x == 0 or x == self.width - 1:
 					game_map_line.append("#")
+				elif x == appleX and y == appleY:
+					game_map_line.append("@")
 				else:
 					game_map_line.append(" ")
 			game_map.append(game_map_line)

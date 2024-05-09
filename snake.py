@@ -2,17 +2,14 @@ import os
 import keyboard
 import time
 import threading
+import random
 
 import system
 import game_player
 import game_map
 
-map_width = 50
-map_height = 20
-
 direction = "w"
 run = True
-player2 = game_player.GamePlayer(5, 5, "d")
 
 def clean_console():
 	if system.get_system_name()  == "windows":
@@ -47,25 +44,24 @@ map_height = int(input("Enter the map height: "))
 
 g_player  = game_player.GamePlayer(10, 10, "$")
 g_map = game_map.GameMap(map_width, map_height)
+score = 0
+
+appleX = 0
+appleY = 0
 
 while run == True:
 	clean_console()
+	
+	print(score)
+	if (appleX == 0 and appleY == 0) or g_player.x == appleX and g_player.y == appleY: 
+		appleX = random.randrange(1, g_map.width - 2)
+		appleY = random.randrange(1, g_map.height - 2) 
+		score += 1	
+		
 	g_player.move_player(direction, g_map)
-	g_map.draw_game_map(g_player)
+
+	g_map.draw_game_map(g_player, appleX, appleY)
 	time.sleep(0.1)
 
-#while True:
-	#oldX = player2.x
-	#oldY = player2.y
-	#player2.move_player(direction)
+clean_console()
 
-	#if len(player2.tails) < 15:	
-#		player2.add_tail(oldX, oldY)
-	
-	#oldTile = player.Tail(oldX, oldY)
-	#for tile in player2.tails:
-	#	x = oldTile.x
-	#	y = oldTile.y
-	#	oldTile = player.Tail(tile.x, tile.y)
-	#	tile.x = x
-	#	tile.y = y
