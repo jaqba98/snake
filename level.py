@@ -5,8 +5,17 @@ class Level:
 		for y in range(height):
 			level_map_line = []
 			for x in range(width):
-				level_map_line.append("")
+				level_map_line.append("0")
 			self.level_map.append(level_map_line)
+
+	def draw_level_map(self):
+		level_map_lines = ""
+		for y in range(len(self.level_map)):
+			level_map_line = ""
+			for x in range(len(self.level_map[y])):
+				level_map_line += self.level_map[y][x]
+			level_map_lines += level_map_line + "\n"
+		print(level_map_lines)
 
 class GameMap:
 	def __init__(self, width, height):

@@ -1,7 +1,8 @@
 import level
 
-level = level.Level(50, 50)
-print(level.level_map)
+g_level = level.Level(50, 50)
+
+g_level.draw_level_map()
 
 # Fix
 
