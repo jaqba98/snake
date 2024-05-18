@@ -3,7 +3,7 @@ class Tail:
 		self.x = x
 		self.y = y
 
-class GamePlayer:
+class Player:
 	tails = []
 
 	def __init__(self, x, y, model):

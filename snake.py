@@ -1,3 +1,5 @@
+import player
+
 import os
 import keyboard
 import time
@@ -5,7 +7,6 @@ import threading
 import random
 
 import system
-import game_player
 import game_map
 
 direction = "w"
@@ -42,7 +43,7 @@ print("----------------------------")
 map_width = int(input("Enter the map width: "))
 map_height = int(input("Enter the map height: "))
 
-g_player  = game_player.GamePlayer(10, 10, "$")
+g_player  = player.Player(10, 10, "$")
 g_map = game_map.GameMap(map_width, map_height)
 score = 0
 
