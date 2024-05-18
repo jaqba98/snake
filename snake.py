@@ -58,10 +58,12 @@ while run == True:
 		appleX = random.randrange(1, g_map.width - 2)
 		appleY = random.randrange(1, g_map.height - 2) 
 		score += 1	
+		g_player.add_tail(g_player.x, g_player.y)
 		
 	g_player.move_player(direction, g_map)
 
 	g_map.draw_game_map(g_player, appleX, appleY)
+	print(len(g_player.tails))
 	time.sleep(0.1)
 
 clean_console()
