@@ -1,16 +1,12 @@
-import tail
+import tails
 
 class Player:
-	tails = []
+	tails = tails.Tails()
 
 	def __init__(self, x, y, model):
 		self.x = x
 		self.y = y
 		self.model = model
-	
-	def add_tail(self, x, y):
-		newTail = tail.Tail(x, y)
-		self.tails.append(newTail)
 
 	def move_player(self, key, g_map):
 		if key == "w":
