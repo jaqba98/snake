@@ -1,3 +1,13 @@
+class Level:
+	level_map = []
+
+	def __init__(self, width, height):
+		for y in range(height):
+			level_map_line = []
+			for x in range(width):
+				level_map_line.append("")
+			self.level_map.append(level_map_line)
+
 class GameMap:
 	def __init__(self, width, height):
 		self.width = width

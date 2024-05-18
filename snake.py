@@ -1,3 +1,10 @@
+import level
+
+level = level.Level(50, 50)
+print(level.level_map)
+
+# Fix
+
 import player
 
 import os
@@ -7,7 +14,7 @@ import threading
 import random
 
 import system
-import game_map
+import level
 
 direction = "w"
 run = True
@@ -44,7 +51,7 @@ map_width = int(input("Enter the map width: "))
 map_height = int(input("Enter the map height: "))
 
 g_player  = player.Player(10, 10, "$")
-g_map = game_map.GameMap(map_width, map_height)
+g_map = level.GameMap(map_width, map_height)
 score = 0
 
 appleX = 0
