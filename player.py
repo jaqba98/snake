@@ -1,7 +1,4 @@
-class Tail:
-	def __init__(self, x, y):
-		self.x = x
-		self.y = y
+import tail
 
 class Player:
 	tails = []
@@ -12,7 +9,7 @@ class Player:
 		self.model = model
 	
 	def add_tail(self, x, y):
-		newTail = Tail(x, y)
+		newTail = tail.Tail(x, y)
 		self.tails.append(newTail)
 
 	def move_player(self, key, g_map):
