@@ -5,8 +5,15 @@ class Level:
 		for y in range(height):
 			level_map_line = []
 			for x in range(width):
-				level_map_line.append("0")
+				level_map_line.append(" ")
 			self.level_map.append(level_map_line)
+		self.add_border()
+
+	def add_border(self):
+		for y in range(len(self.level_map)):
+			for x in range(len(self.level_map[y])):
+				if x == 0 or x == len(self.level_map[y]) - 1 or y == 0 or y == len(self.level_map) - 1:
+					self.level_map[y][x] = "#"
 
 	def draw_level_map(self):
 		level_map_lines = ""
