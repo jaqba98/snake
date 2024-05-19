@@ -1,8 +1,11 @@
 import level
+import system
 
 g_level = level.Level(50, 20)
 
-g_level.draw_level_map()
+while True:
+	system.clear_console_screen()
+	g_level.draw_level_map()
 
 # Fix
 
@@ -14,17 +17,10 @@ import time
 import threading
 import random
 
-import system
 import level
 
 direction = "w"
 run = True
-
-def clean_console():
-	if system.get_system_name()  == "windows":
-		os.system("cls")
-	elif system.get_system_name() == "unix":
-		os.system("clear")
 
 def monitor_keyboard_events():
 	global direction
@@ -58,7 +54,7 @@ appleX = 0
 appleY = 0
 
 while run == True:
-	clean_console()
+	system.clear_console_screen()
 	
 	print(score)
 	if (appleX == 0 and appleY == 0) or g_player.x == appleX and g_player.y == appleY: 
@@ -72,5 +68,5 @@ while run == True:
 	print(len(g_player.tails))
 	time.sleep(0.1)
 
-clean_console()
+system.clear_console_screen()
 
