@@ -6,7 +6,7 @@ def get_system_name():
 	raise Exception("Not supported os.name = " + os.name)
 
 def clear_console_screen():
-	if get_system_name()  == "windows":
+	if os.name == "nt":
 		os.system("cls")
-	elif get_system_name() == "unix":
+	elif os.name == "posix":
 		os.system("clear")

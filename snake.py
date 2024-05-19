@@ -2,31 +2,22 @@ import time
 
 import level
 import system
+import player
 
-fps = 60
-interval = 1 / fps
-
+g_player = player.Player(10, 10, "@")
 g_level = level.Level(50, 20)
 
 while True:
-	start_time = time.time();
-
 	system.clear_console_screen()
+	g_level.init_level_map(g_player)
 	g_level.draw_level_map()
-
-	elapsed_time = time.time() - start_time
-	time.sleep(max(0, interval - elapsed_time))
+	time.sleep(1)
 
 # Fix
 
-import player
-
-import os
 import keyboard
 import threading
 import random
-
-import level
 
 direction = "w"
 run = True
