@@ -1,11 +1,21 @@
+import time
+
 import level
 import system
+
+fps = 60
+interval = 1 / fps
 
 g_level = level.Level(50, 20)
 
 while True:
+	start_time = time.time();
+
 	system.clear_console_screen()
 	g_level.draw_level_map()
+
+	elapsed_time = time.time() - start_time
+	time.sleep(max(0, interval - elapsed_time))
 
 # Fix
 
@@ -13,7 +23,6 @@ import player
 
 import os
 import keyboard
-import time
 import threading
 import random
 
