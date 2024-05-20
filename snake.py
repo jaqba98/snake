@@ -31,6 +31,7 @@ while True:
 	system.clear_console_screen()
 	g_level.init_level_map(g_player)
 	g_level.draw_level_map()
+	g_player.add_tail(g_player.x, g_player.y)
 	g_player.move_player(direction)
 	time.sleep(0.1)
 

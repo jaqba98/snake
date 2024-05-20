@@ -22,8 +22,9 @@ class Level:
 					self.level_map[y][x] = "#"
 
 	def add_player(self, player):
-		self.level_map[player.y][player.x] = player.model;
-
+		self.level_map[player.y][player.x] = player.model
+		for tail in player.tails:
+			self.level_map[tail.y][tail.x] = player.model
 	def draw_level_map(self):
 		level_map_lines = ""
 		for y in range(len(self.level_map)):
