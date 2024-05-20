@@ -1,31 +1,15 @@
 import time
+import keyboard
+import threading
 
 import level
 import system
 import player
 
-g_player = player.Player(10, 10, "@")
-g_level = level.Level(50, 20)
-
-while True:
-	system.clear_console_screen()
-	g_level.init_level_map(g_player)
-	g_level.draw_level_map()
-	g_player.move_player("d")
-	time.sleep(1)
-
-# Fix
-
-import keyboard
-import threading
-import random
-
 direction = "w"
-run = True
-
+ 
 def monitor_keyboard_events():
 	global direction
-	global run
 	while True:
 		if keyboard.is_pressed("w"):
 			direction = "w"
@@ -35,39 +19,18 @@ def monitor_keyboard_events():
 			direction = "a"
 		if keyboard.is_pressed("d"):
 			direction = "d"
-		if keyboard.is_pressed("e"):
-			run = False
 
 keyboard_thread = threading.Thread(target=monitor_keyboard_events)
 keyboard_thread.daemon = True
 keyboard_thread.start()
 
-print("Snake in Python v0.1")
-print("Author: Jakub Olejarczyk")
-print("----------------------------")
-map_width = int(input("Enter the map width: "))
-map_height = int(input("Enter the map height: "))
+g_player = player.Player(10, 10, "@")
+g_level = level.Level(50, 20)
 
-g_player  = player.Player(10, 10, "$")
-score = 0
-
-appleX = 0
-appleY = 0
-
-while run == True:
+while True:
 	system.clear_console_screen()
-	
-	print(score)
-	if (appleX == 0 and appleY == 0) or g_player.x == appleX and g_player.y == appleY: 
-		#appleX = random.randrange(1, g_map.width - 2)
-		#appleY = random.randrange(1, g_map.height - 2) 
-		score += 1	
-		#g_player.add_tail(g_player.x, g_player.y)
-		
-	g_player.move_player(direction, g_map)
-
-	print(len(g_player.tails))
+	g_level.init_level_map(g_player)
+	g_level.draw_level_map()
+	g_player.move_player(direction)
 	time.sleep(0.1)
-
-system.clear_console_screen()
 
