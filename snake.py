@@ -1,7 +1,7 @@
 import time
-import keyboard
 import threading
 import random
+import readchar
 
 import level
 import system
@@ -10,29 +10,20 @@ import apple
 
 direction = "w"
  
-def monitor_keyboard_events():
-	global direction
-	while True:
-		if keyboard.is_pressed("w"):
-			direction = "w"
-		if keyboard.is_pressed("s"):
-			direction = "s"
-		if keyboard.is_pressed("a"):
-			direction = "a"
-		if keyboard.is_pressed("d"):
-			direction = "d"
-
-keyboard_thread = threading.Thread(target=monitor_keyboard_events)
-keyboard_thread.daemon = True
-keyboard_thread.start()
-
 g_player = player.Player(10, 10, "@")
 g_level = level.Level(50, 20)
 g_apple = apple.Apple(15, 15, "o")
 
+def read_key():
+	global direction
+	while True:
+		direction = readchar.readkey()
+
+key_reader_thread = threading.Thread(target=read_key, daemon=True)
+key_reader_thread.start()
+
 while True:
 	system.clear_console_screen()
-
 	if g_player.x == g_apple.x and g_player.y == g_apple.y:
 		g_apple.x = random.randrange(1, g_level.width)
 		g_apple.y = random.randrange(1, g_level.height)
